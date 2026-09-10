@@ -46,3 +46,9 @@ app.*.map.json
 /windows/flutter/ephemeral/
 /linux/flutter/ephemeral/
 /macos/Flutter/ephemeral/
+
+# Environment variables (secrets)
+.env*
+
+# Kotlin build sessions
+.kotlin/
