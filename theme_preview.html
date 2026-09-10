@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hifaz Tracker — Theme Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Emerald Glass — current default */
+    --primary: #10B981;
+    --primary-soft: #34D399;
+    --bg: #0F172A;
+    --bg-deep: #0B1120;
+    --bg-elevated: #1E293B;
+    --card: rgba(255,255,255,0.08);
+    --card-strong: rgba(255,255,255,0.12);
+    --border: rgba(255,255,255,0.13);
+    --text: #F1F5F9;
+    --text-2: #94A3B8;
+    --text-3: #64748B;
+    --danger: #F43F5E;
+    --warning: #F59E0B;
+    --info: #38BDF8;
+    --indigo: #818CF8;
+    --grad-a: #10B981;
+    --grad-b: #059669;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', 'Noto Nastaliq Urdu', sans-serif;
+    background: #0B1120;
+    color: #E2E8F0;
+    min-height: 100vh;
+    padding: 32px 20px 60px;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(16,185,129,0.15), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(129,140,248,0.12), transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(56,189,248,0.08), transparent 50%);
+  }
+
+  .page-title {
+    text-align: center;
+    margin-bottom: 6px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .page-sub {
+    text-align: center;
+    color: #94A3B8;
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  /* Theme picker chips */
+  .picker {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 34px;
+  }
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    color: #CBD5E1;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+  }
+  .chip:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.3); }
+  .chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #06281C;
+  }
+  .chip .dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+  }
+
+  .layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 340px;
+    background: var(--bg);
+    border-radius: 42px;
+    padding: 12px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.06);
+    position: relative;
+    transition: background .35s;
+  }
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 22px; left: 50%;
+    transform: translateX(-50%);
+    width: 90px; height: 22px;
+    background: var(--bg-deep);
+    border-radius: 20px;
+    z-index: 5;
+  }
+  .screen {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+    border-radius: 32px;
+    overflow: hidden;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: background .35s;
+  }
+  .screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 85% 0%, var(--primary), transparent 45%),
+      radial-gradient(circle at 0% 60%, var(--indigo), transparent 40%);
+    opacity: 0.16;
+    pointer-events: none;
+  }
+
+  /* Status bar */
+  .statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px 8px;
+    font-size: 11px; font-weight: 700;
+    color: var(--text-2);
+  }
+  .statusbar .time { color: var(--text); }
+
+  /* Header */
+  .header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 18px 8px;
+  }
+  .logo {
+    width: 40px; height: 40px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px; color: #fff;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 40%, transparent);
+  }
+  .h-title { font-size: 15.5px; font-weight: 800; color: var(--text); line-height: 1.15; }
+  .h-sub { font-size: 9.5px; color: var(--text-2); }
+  .h-right { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .section-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 5px 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .icon-btn {
+    width: 34px; height: 34px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  /* Date row */
+  .daterow {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 18px 10px;
+  }
+  .datechip {
+    background: color-mix(in srgb, var(--primary) 18%, transparent);
+    color: var(--primary-soft);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .date-txt { color: var(--text-2); font-size: 11px; }
+
+  /* Stats cards */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 0 18px 12px;
+  }
+  .stat {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 6px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .stat .n { font-size: 17px; font-weight: 800; color: var(--text); }
+  .stat .l { font-size: 8.5px; color: var(--text-2); margin-top: 2px; }
+
+  /* Student list */
+  .list { flex: 1; padding: 0 18px; overflow: hidden; }
+  .list-title {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+  }
+  .list-title span { font-size: 11px; font-weight: 800; color: var(--text); }
+  .list-title .count { font-size: 9.5px; color: var(--text-3); }
+
+  .student {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    transition: background .35s;
+  }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--primary) 25%, transparent);
+    color: var(--primary-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+  }
+  .s-name { font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.2; }
+  .s-lessons { font-size: 9px; color: var(--text-3); margin-top: 2px; }
+  .s-status { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+  .badge {
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .badge.ok   { background: color-mix(in srgb, var(--primary) 18%, transparent); color: var(--primary-soft); }
+  .badge.warn { background: color-mix(in srgb, var(--warning) 20%, transparent); color: #FCD34D; }
+  .badge.dang { background: color-mix(in srgb, var(--danger) 20%, transparent); color: #FDA4AF; }
+
+  /* Bottom nav */
+  .bottomnav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 12px 18px 20px;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid var(--border);
+  }
+  .nav-item { text-align: center; font-size: 8.5px; color: var(--text-3); font-weight: 600; }
+  .nav-item .ico { font-size: 17px; display: block; margin-bottom: 2px; }
+  .nav-item.active { color: var(--primary-soft); }
+
+  /* Info panel */
+  .info {
+    flex: 1;
+    min-width: 280px;
+    max-width: 420px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 22px;
+    padding: 26px;
+  }
+  .info h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; color: #F1F5F9; }
+  .info p { font-size: 12.5px; color: #94A3B8; line-height: 1.7; margin-bottom: 14px; }
+  .swatches { display: flex; gap: 10px; margin-bottom: 18px; }
+  .swatch {
+    width: 44px; height: 44px; border-radius: 13px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  }
+  .info .row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .info .row .lbl { font-size: 12px; color: #94A3B8; }
+  .info .row .val { margin-left: auto; font-size: 11px; font-weight: 700; color: #E2E8F0; font-family: monospace; }
+
+  .footnote { text-align: center; margin-top: 30px; font-size: 11px; color: #64748B; }
+</style>
+</head>
+<body>
+
+  <div class="page-title">🎨 Hifaz Tracker — Theme Gallery</div>
+  <div class="page-sub">Koi bhi theme select karein — app ka preview foran update ho jayega</div>
+
+  <div class="picker" id="picker"></div>
+
+  <div class="layout">
+    <div class="phone">
+      <div class="screen" id="screen">
+        <div class="statusbar">
+          <span class="time">4:32</span>
+          <span>📶 🔋 87%</span>
+        </div>
+        <div class="header">
+          <div class="logo">📖</div>
+          <div>
+            <div class="h-title">حفظ ٹریکر</div>
+            <div class="h-sub">قرآن حفظ کا انتظامی نظام</div>
+          </div>
+          <div class="h-right">
+            <div class="section-chip">سیکشن A</div>
+            <div class="icon-btn">👥</div>
+          </div>
+        </div>
+        <div class="daterow">
+          <div class="datechip">آج</div>
+          <div class="date-txt">بدھ، 12 اگست 2026</div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n">24</div><div class="l">کل طلبہ</div></div>
+          <div class="stat"><div class="n" style="color:var(--primary-soft)">21</div><div class="l">موجود</div></div>
+          <div class="stat"><div class="n" style="color:var(--danger)">3</div><div class="l">غیر حاضر</div></div>
+        </div>
+        <div class="list">
+          <div class="list-title"><span>آج کے طلبہ</span><span class="count">24 طلبہ</span></div>
+          <div class="student">
+            <div class="avatar">م</div>
+            <div>
+              <div class="s-name">محمد احمد</div>
+              <div class="s-lessons">سبق: ص 12 · سبقی: پارہ 5 · منزل: ۲/۳</div>
+            </div>
+            <div class="s-status"><span class="badge ok">✓ موجود</span></div>
+          </div>
+          <div class="student">
+            <div class="avatar">ع</div>
+            <div>
+              <div class="s-name">عبداللہ خان</div>
+              <div class="s-lessons">سبق: ص 8 · سبقی: پارہ 3</div>
+            </div>
+            <div class="s-status"><span class="badge warn">⚠ تنبیہ</span></div>
+          </div>
+          <div class="student">
+            <div class="avatar">ح</div>
+            <div>
+              <div class="s-name">حسن رضا</div>
+              <div class="s-lessons">سبق: ص 20 · منزل: ۵/۲</div>
+            </div>
+            <div class="s-status"><span class="badge dang">✕ غیر حاضر</span></div>
+          </div>
+          <div class="student">
+            <div class="avatar">ی</div>
+            <div>
+              <div class="s-name">یوسف علی</div>
+              <div class="s-lessons">سبقی: پارہ 7 · منزل: ۹/۱</div>
+            </div>
+            <div class="s-status"><span class="badge ok">✓ موجود</span></div>
+          </div>
+        </div>
+        <div class="bottomnav">
+          <div class="nav-item active"><span class="ico">✅</span>حاضری</div>
+          <div class="nav-item"><span class="ico">📊</span>تجزیہ</div>
+          <div class="nav-item"><span class="ico">📄</span>رپورٹس</div>
+          <div class="nav-item"><span class="ico">⚙️</span>ترتیبات</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info">
+      <h3 id="info-title">Emerald Glass</h3>
+      <p id="info-desc">Maujooda default theme — midnight background par emerald green accents, glassmorphic cards ke sath. Dark aur professional.</p>
+      <div class="swatches" id="swatches"></div>
+      <div class="row"><span class="lbl">Primary accent</span><span class="val" id="v-primary"></span></div>
+      <div class="row"><span class="lbl">Background</span><span class="val" id="v-bg"></span></div>
+      <div class="row"><span class="lbl">Surface (cards)</span><span class="val" id="v-card"></span></div>
+      <div class="row"><span class="lbl">Text</span><span class="val" id="v-text"></span></div>
+      <div class="row"><span class="lbl">Danger / Warning</span><span class="val" id="v-danger"></span></div>
+    </div>
+  </div>
+
+  <div class="footnote">Preview ke liye hai — pasand aane par main poore app ka UI isi theme par set kar dunga</div>
+
+<script>
+const THEMES = [
+  {
+    id: 'emerald', name: 'Emerald Glass', urdu: 'زمرد گلاس',
+    desc: 'Maujooda default — midnight par emerald green. Dark, professional, classroom-friendly.',
+    vars: {
+      '--primary': '#10B981', '--primary-soft': '#34D399',
+      '--bg': '#0F172A', '--bg-deep': '#0B1120', '--bg-elevated': '#1E293B',
+      '--card': 'rgba(255,255,255,0.08)', '--card-strong': 'rgba(255,255,255,0.12)',
+      '--border': 'rgba(255,255,255,0.13)',
+      '--text': '#F1F5F9', '--text-2': '#94A3B8', '--text-3': '#64748B',
+      '--danger': '#F43F5E', '--warning': '#F59E0B', '--info': '#38BDF8', '--indigo': '#818CF8',
+      '--grad-a': '#10B981', '--grad-b': '#059669'
+    }
+  },
+  {
+    id: 'indigo', name: 'Royal Indigo', urdu: 'شاہی انڈیگو',
+    desc: 'Deep indigo/violet accents — elegant aur distinctive. Aalim/madrasa branding ke liye behtareen.',
+    vars: {
+      '--primary': '#6366F1', '--primary-soft': '#818CF8',
+      '--bg': '#131126', '--bg-deep': '#0E0C1E', '--bg-elevated': '#221F3E',
+      '--card': 'rgba(255,255,255,0.08)', '--card-strong': 'rgba(255,255,255,0.12)',
+      '--border': 'rgba(255,255,255,0.13)',
+      '--text': '#F1F5F9', '--text-2': '#A5B4FC', '--text-3': '#7C86A8',
+      '--danger': '#F43F5E', '--warning': '#F59E0B', '--info': '#38BDF8', '--indigo': '#C4B5FD',
+      '--grad-a': '#6366F1', '--grad-b': '#8B5CF6'
+    }
+  },
+  {
+    id: 'ocean', name: 'Ocean Sky', urdu: 'سمندری آسمان',
+    desc: 'Cool blue/sky accents — fresh aur calm. Classroom ke liye soothing look.',
+    vars: {
+      '--primary': '#0EA5E9', '--primary-soft': '#38BDF8',
+      '--bg': '#0B1522', '--bg-deep': '#081019', '--bg-elevated': '#16324A',
+      '--card': 'rgba(255,255,255,0.08)', '--card-strong': 'rgba(255,255,255,0.12)',
+      '--border': 'rgba(255,255,255,0.13)',
+      '--text': '#F1F5F9', '--text-2': '#93C5FD', '--text-3': '#64748B',
+      '--danger': '#F43F5E', '--warning': '#F59E0B', '--info': '#7DD3FC', '--indigo': '#818CF8',
+      '--grad-a': '#0EA5E9', '--grad-b': '#0284C7'
+    }
+  },
+  {
+    id: 'amber', name: 'Amber Gold', urdu: 'سنہری عنبر',
+    desc: 'Warm golden accents — dini/Islamic feel, narm aur khushgawar. v4 ki rooh ke qareeb.',
+    vars: {
+      '--primary': '#F59E0B', '--primary-soft': '#FBBF24',
+      '--bg': '#15120A', '--bg-deep': '#100D08', '--bg-elevated': '#2A2413',
+      '--card': 'rgba(255,255,255,0.08)', '--card-strong': 'rgba(255,255,255,0.12)',
+      '--border': 'rgba(255,255,255,0.13)',
+      '--text': '#FDF6E9', '--text-2': '#D6C49A', '--text-3': '#8C7C5A',
+      '--danger': '#F43F5E', '--warning': '#FBBF24', '--info': '#38BDF8', '--indigo': '#818CF8',
+      '--grad-a': '#F59E0B', '--grad-b': '#D97706'
+    }
+  },
+  {
+    id: 'blue', name: 'Classic Blue', urdu: 'کلاسک نیلا',
+    desc: 'v4 wala classic blue — familiar aur trusted. Pehle se use karne walon ke liye comfortable.',
+    vars: {
+      '--primary': '#3B82F6', '--primary-soft': '#60A5FA',
+      '--bg': '#0D1520', '--bg-deep': '#0A1018', '--bg-elevated': '#1B2C45',
+      '--card': 'rgba(255,255,255,0.08)', '--card-strong': 'rgba(255,255,255,0.12)',
+      '--border': 'rgba(255,255,255,0.13)',
+      '--text': '#F1F5F9', '--text-2': '#93C5FD', '--text-3': '#64748B',
+      '--danger': '#F43F5E', '--warning': '#F59E0B', '--info': '#38BDF8', '--indigo': '#818CF8',
+      '--grad-a': '#3B82F6', '--grad-b': '#2563EB'
+    }
+  },
+  {
+    id: 'rose', name: 'Rose Bloom', urdu: 'گلابی پھول',
+    desc: 'Soft rose/pink accents — narm, friendly aur unique. Family-oriented feel.',
+    vars: {
+      '--primary': '#F43F5E', '--primary-soft': '#FB7185',
+      '--bg': '#170D13', '--bg-deep': '#11090D', '--bg-elevated': '#2E1A22',
+      '--card': 'rgba(255,255,255,0.08)', '--card-strong': 'rgba(255,255,255,0.12)',
+      '--border': 'rgba(255,255,255,0.13)',
+      '--text': '#FDF0F3', '--text-2': '#F4A6B4', '--text-3': '#8A6470',
+      '--danger': '#FB7185', '--warning': '#F59E0B', '--info': '#38BDF8', '--indigo': '#C4B5FD',
+      '--grad-a': '#F43F5E', '--grad-b': '#E11D48'
+    }
+  },
+  {
+    id: 'paper', name: 'Paper Light', urdu: 'ہلکا کاغذ',
+    desc: 'Light theme — safed/slate background, emerald accents. Din ke waqt bright aur clean.',
+    vars: {
+      '--primary': '#059669', '--primary-soft': '#10B981',
+      '--bg': '#F1F5F9', '--bg-deep': '#E2E8F0', '--bg-elevated': '#FFFFFF',
+      '--card': 'rgba(255,255,255,0.75)', '--card-strong': 'rgba(255,255,255,0.92)',
+      '--border': 'rgba(15,23,42,0.10)',
+      '--text': '#0F172A', '--text-2': '#475569', '--text-3': '#94A3B8',
+      '--danger': '#E11D48', '--warning': '#D97706', '--info': '#0284C7', '--indigo': '#6366F1',
+      '--grad-a': '#059669', '--grad-b': '#10B981'
+    }
+  }
+];
+
+const picker = document.getElementById('picker');
+const screen = document.getElementById('screen');
+
+function applyTheme(t) {
+  const root = document.documentElement;
+  Object.entries(t.vars).forEach(([k, v]) => root.style.setProperty(k, v));
+
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.id === t.id));
+
+  document.getElementById('info-title').textContent = `${t.name} — ${t.urdu}`;
+  document.getElementById('info-desc').textContent = t.desc;
+  document.getElementById('v-primary').textContent = t.vars['--primary'];
+  document.getElementById('v-bg').textContent = t.vars['--bg'];
+  document.getElementById('v-card').textContent = t.vars['--card'];
+  document.getElementById('v-text').textContent = t.vars['--text'];
+  document.getElementById('v-danger').textContent = t.vars['--danger'];
+
+  const sw = document.getElementById('swatches');
+  sw.innerHTML = '';
+  const colors = [t.vars['--primary'], t.vars['--primary-soft'], t.vars['--danger'], t.vars['--warning'], t.vars['--info']];
+  colors.forEach(c => {
+    const d = document.createElement('div');
+    d.className = 'swatch';
+    d.style.background = c;
+    sw.appendChild(d);
+  });
+}
+
+THEMES.forEach(t => {
+  const c = document.createElement('div');
+  c.className = 'chip';
+  c.dataset.id = t.id;
+  c.innerHTML = `<span class="dot" style="background:${t.vars['--primary']}"></span>${t.name}`;
+  c.onclick = () => applyTheme(t);
+  picker.appendChild(c);
+});
+
+applyTheme(THEMES[0]);
+</script>
+</body>
+</html>
